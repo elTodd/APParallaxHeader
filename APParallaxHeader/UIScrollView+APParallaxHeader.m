@@ -51,7 +51,12 @@ static char UIScrollViewParallaxView;
         parallaxView.parallaxHeight = height;
         [self addSubview:parallaxView];
         
-        parallaxView.originalTopInset = self.contentInset.top;
+        if(@available(iOS 11.0, *)) {
+            parallaxView.originalTopInset = self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            parallaxView.originalTopInset = self.adjustedContentInset.top;
+        } else {
+            parallaxView.originalTopInset = self.contentInset.top;
+        }
         
         UIEdgeInsets newInset = self.contentInset;
         newInset.top = height;
@@ -83,7 +88,12 @@ static char UIScrollViewParallaxView;
         parallaxView.parallaxHeight = height;
         [self addSubview:parallaxView];
 
-        parallaxView.originalTopInset = self.contentInset.top;
+        if(@available(iOS 11.0, *)) {
+            parallaxView.originalTopInset = self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            parallaxView.originalTopInset = self.adjustedContentInset.top;
+        } else {
+            parallaxView.originalTopInset = self.contentInset.top;
+        }
         
         UIEdgeInsets newInset = self.contentInset;
         newInset.top = height;
